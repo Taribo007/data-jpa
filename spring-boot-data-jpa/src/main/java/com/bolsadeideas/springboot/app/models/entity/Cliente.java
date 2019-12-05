@@ -40,9 +40,12 @@ public class Cliente implements Serializable {
 	private String email;
 
 	@Column(name = "create_at")
-	@Temporal(TemporalType.DATE) // Con esta eqtiqueta establecemos el formato de fecha que vamos a usar en el
-									// campo
+	@Temporal(TemporalType.DATE) // Con esta eqtiqueta establecemos el formato de fecha que vamos a usar en el campo
 	private Date createAt;
+	
+	// Constructores
+
+	// Getter y Setter
 
 	public Long getIdCliente() {
 		return idCliente;
@@ -88,9 +91,6 @@ public class Cliente implements Serializable {
 		return serialVersionUID;
 	}
 
-	// Constructores
-
-	// Getter y Setter
 
 	// Metodos
 
