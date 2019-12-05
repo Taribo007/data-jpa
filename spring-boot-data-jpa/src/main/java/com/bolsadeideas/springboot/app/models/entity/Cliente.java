@@ -30,7 +30,7 @@ public class Cliente implements Serializable {
 	// autonumerico)
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private Long idCliente;
+	private Long id;
 
 	// Se pueden establecer varias caracteristicas del campo, separando por comas,
 	// dentro del parentesis de la etiqueta @Column()
@@ -47,12 +47,12 @@ public class Cliente implements Serializable {
 
 	// Getter y Setter
 
-	public Long getIdCliente() {
-		return idCliente;
+	public Long getId() {
+		return id;
 	}
 
-	public void setIdCliente(Long idCliente) {
-		this.idCliente = idCliente;
+	public void setId(Long id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
