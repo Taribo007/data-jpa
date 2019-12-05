@@ -13,7 +13,7 @@ import com.bolsadeideas.springboot.app.models.entity.Cliente;
 
 //Marcamos la clase como componente de persistencia, de acceso a datos
 //En realidad es un tipo de la etiqueta @component, por tanto lo enmarca dentro del contenedor de spring
-@Repository
+@Repository("clienteDaoJPA")
 public class ClienteDaoImpl implements iClienteDao {
 
 	//se encarga de manejar als clases de entidades. Todas la s operaciones a la BD, pero a nivel de objeto, a traves d ela sclase enptyti
