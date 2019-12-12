@@ -13,6 +13,8 @@ import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 //Una clase que esta anotada con la etiqueta entity hace que se cree una tabla con los campos exactamente iguales que los atributos de la clase
 //se mapea exactamente igual, a menos que anotemos el atributo con la etiqueta @column("NombreDelCampo")
 @Entity
@@ -42,6 +44,7 @@ public class Cliente implements Serializable {
 
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE) // Con esta eqtiqueta establecemos el formato de fecha que vamos a usar en el campo
+	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date createAt;
 	
 	// Constructores
@@ -95,8 +98,8 @@ public class Cliente implements Serializable {
 
 	// Metodos
 
-	@PrePersist
-	public void prePersist() {
-		createAt= new Date();
-	}
+	//@PrePersist
+	//public void prePersist() {
+	//	createAt= new Date();
+	//}
 }
