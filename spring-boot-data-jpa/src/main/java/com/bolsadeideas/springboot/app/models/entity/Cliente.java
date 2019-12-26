@@ -8,14 +8,12 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotEmpty;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -43,8 +41,9 @@ public class Cliente implements Serializable {
 	// dentro del parentesis de la etiqueta @Column()
 	// @Column(name="NombreCliente")
 	
-	@NotEmpty //Anotacion para indicar que nombre es un campo requerido. Se uas para tipos de dato string, ya que comprunba que el campo no este vacio
+	
 	//@Size(min = 4,max = 12)//Para validar numero minimo y maximo de caracteres
+	@NotEmpty //Anotacion para indicar que nombre es un campo requerido. Se uas para tipos de dato string, ya que comprunba que el campo no este vacio
 	private String nombre;
 	@NotEmpty
 	private String apellido;
