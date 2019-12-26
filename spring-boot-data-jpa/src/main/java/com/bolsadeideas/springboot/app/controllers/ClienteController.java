@@ -2,10 +2,13 @@ package com.bolsadeideas.springboot.app.controllers;
 
 import java.util.Map;
 
+import javax.validation.Valid;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -44,8 +47,13 @@ public class ClienteController {
 	}
 	
 	@RequestMapping(value="/form",method = RequestMethod.POST)
-	public String guardar (Cliente cliente) {
+	public String guardar (@Valid Cliente cliente,BindingResult result, Model model) {//añadimos la anotacion Valid, para que tengan efecto las validaciones que hemos incorporado en los atributos de la clase cliente
+													//Añadimos el objeto result, del tipo BindingResult, para que al usuario le salga que errores ha cometido al introducir los datos
 		
+		if(result.hasErrors()) {
+			model.addAttribute("titulo", "Formulario de cliente");
+			return "form";
+		}
 		clienteDao.save(cliente);
 		
 		return "redirect:listar";

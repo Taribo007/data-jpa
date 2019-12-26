@@ -12,6 +12,10 @@ import javax.persistence.PrePersist;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -38,10 +42,17 @@ public class Cliente implements Serializable {
 	// Se pueden establecer varias caracteristicas del campo, separando por comas,
 	// dentro del parentesis de la etiqueta @Column()
 	// @Column(name="NombreCliente")
+	
+	@NotEmpty //Anotacion para indicar que nombre es un campo requerido. Se uas para tipos de dato string, ya que comprunba que el campo no este vacio
+	//@Size(min = 4,max = 12)//Para validar numero minimo y maximo de caracteres
 	private String nombre;
+	@NotEmpty
 	private String apellido;
+	@NotEmpty
+	@Email //Valida que sea de tipo email
 	private String email;
 
+	@NotNull //Valida que el campo no sea nulo
 	@Column(name = "create_at")
 	@Temporal(TemporalType.DATE) // Con esta eqtiqueta establecemos el formato de fecha que vamos a usar en el campo
 	@DateTimeFormat(pattern="yyyy-MM-dd")
