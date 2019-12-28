@@ -9,5 +9,6 @@ public interface iClienteDao {
 	public List<Cliente> buscarTodos();
 	
 	public void save (Cliente cliente);
+	public Cliente findOne(long id);
 	
 }

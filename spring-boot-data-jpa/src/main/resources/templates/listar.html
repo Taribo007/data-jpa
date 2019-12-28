@@ -27,7 +27,7 @@
 
 <div class="container">
 
-	<a th:href="@{/form}">Crear Cliente</a>
+	<p><a class="btn btn-default btn-xs" th:href="@{/form}">Crear Cliente</a></p>
 	<h1 class="text-primary border border-success border-top-0 border-right-0 border-left-0" th:text="${titulo}"></h1>
 
 	<table class="table table-striped">
@@ -38,7 +38,7 @@
 				<th>Apellido</th>
 				<th>Correo</th>
 				<th>Fecha</th>
-
+				<th>Editar</th>
 			</tr>
 
 		</thead>
@@ -50,6 +50,7 @@
 				<td th:text="${cliente.apellido}"></td>
 				<td th:text="${cliente.email}"></td>
 				<td th:text="${cliente.createAt}"></td>
+				<td><a class="btn btn-primary btn-xs" th:href="@{/form/} + ${cliente.id}" th:text="'editar'"></a></td>
 			
 			</tr>
 
