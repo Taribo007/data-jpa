@@ -81,4 +81,16 @@ public class ClienteController {
 		status.setComplete();//Elimina le objeto cliente d ela session
 		return "redirect:listar";
 	}
+	
+	@RequestMapping(value="/eliminar/{id}")
+	public String eliminar(@PathVariable(value="id") long id) {
+		
+		
+		if(id>0) {
+			clienteDao.deleteOne(id);
+		}
+		
+		return "redirect:/listar";
+	}
+	
 }

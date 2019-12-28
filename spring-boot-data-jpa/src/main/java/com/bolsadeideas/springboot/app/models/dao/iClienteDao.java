@@ -10,5 +10,5 @@ public interface iClienteDao {
 	
 	public void save (Cliente cliente);
 	public Cliente findOne(long id);
-	
+	public void deleteOne(long id);
 }
