@@ -26,7 +26,7 @@ public class ClienteDaoImpl implements iClienteDao {
 	private EntityManager em;
 	
 	@SuppressWarnings("unchecked")
-	@Transactional(readOnly=true)
+	//@Transactional(readOnly=true)
 	@Override
 	public List<Cliente> buscarTodos() {
 
@@ -34,7 +34,7 @@ public class ClienteDaoImpl implements iClienteDao {
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public void save(Cliente cliente) {
 		if(cliente.getId() !=null && cliente.getId()>0) {
 			em.merge(cliente);
@@ -45,14 +45,14 @@ public class ClienteDaoImpl implements iClienteDao {
 	}
 
 	@Override
-	@Transactional(readOnly=true)
+	//@Transactional(readOnly=true)
 	public Cliente findOne(long id) {
 		
 		return em.find(Cliente.class, id);
 	}
 
 	@Override
-	@Transactional
+	//@Transactional
 	public void deleteOne(long id) {
 		
 			em.remove(findOne(id));

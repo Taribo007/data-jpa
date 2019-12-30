@@ -17,22 +17,24 @@ import org.springframework.web.bind.support.SessionStatus;
 
 import com.bolsadeideas.springboot.app.models.dao.iClienteDao;
 import com.bolsadeideas.springboot.app.models.entity.Cliente;
+import com.bolsadeideas.springboot.app.models.service.IClienteService;
 
 @Controller
 @SessionAttributes("cliente")
 public class ClienteController {
 	
 	
+	
+	//@Qualifier("clienteDaoJPA")
 	@Autowired
-	@Qualifier("clienteDaoJPA")
-	private iClienteDao clienteDao;
+	private IClienteService clienteService;
 	
 
 	@RequestMapping(value="/listar",method = RequestMethod.GET)
 	public String listar(Model model) {
 		
 		model.addAttribute("titulo", "Listado de clientes");
-		model.addAttribute("clientes", clienteDao.buscarTodos());
+		model.addAttribute("clientes", clienteService.buscarTodos());
 		
 		return "listar";
 		
@@ -56,7 +58,7 @@ public class ClienteController {
 		Cliente cliente=null;
 		
 		if(id>0) {
-			cliente=clienteDao.findOne(id);
+			cliente=clienteService.findOne(id);
 		}else {
 			return "redirect:/listar";
 		}
@@ -76,7 +78,7 @@ public class ClienteController {
 			model.addAttribute("titulo", "Formulario de cliente");
 			return "form";
 		}
-		clienteDao.save(cliente);
+		clienteService.save(cliente);
 		
 		status.setComplete();//Elimina le objeto cliente d ela session
 		return "redirect:listar";
@@ -87,7 +89,7 @@ public class ClienteController {
 		
 		
 		if(id>0) {
-			clienteDao.deleteOne(id);
+			clienteService.deleteOne(id);
 		}
 		
 		return "redirect:/listar";
