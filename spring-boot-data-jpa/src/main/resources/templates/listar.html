@@ -7,10 +7,15 @@
 
 <header th:replace="layout/layout :: header"></header>
 
-<div class="container">
+<div class="container py-4">
 
-	<p><a class="btn btn-default btn-xs" th:href="@{/form}">Crear Cliente</a></p>
-	<h1 class="text-primary border border-success border-top-0 border-right-0 border-left-0" th:text="${titulo}"></h1>
+	<div class="card bg-light">
+	<div class="card-header" th:text="${titulo}"></div>
+	<div class="card.body">
+
+	<h4 class="card-title">
+		<a class="btn btn-primary btn-xs" th:href="@{/form}">Crear Cliente</a>
+	</h4>
 
 	<table class="table table-striped">
 		<thead>
@@ -41,6 +46,8 @@
 		</tbody>
 
 	</table>
+	</div>
+	</div>
 </div>	
 	<footer th:replace="layout/layout :: footer"></footer>
 
