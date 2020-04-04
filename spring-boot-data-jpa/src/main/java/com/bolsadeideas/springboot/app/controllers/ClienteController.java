@@ -120,8 +120,13 @@ public class ClienteController {
 		}
 		
 		if (!foto.isEmpty()) {
-			Path directorioRecursos=Paths.get("src//main//resources//static//uploads");
-			String rootPath=directorioRecursos.toFile().getAbsolutePath();
+			//Esta es la ruta cuando guardamos las imagenes en un directorio estaico, dentro de spring
+			//Lo comentamos para hcaerlode otra forma
+			//Path directorioRecursos=Paths.get("src//main//resources//static//uploads");
+			
+			//String rootPath=directorioRecursos.toFile().getAbsolutePath();
+			String rootPath="C://Temp//Uploads";
+			
 			try {
 				byte[] bytes=foto.getBytes();
 				Path rutaCompleta=Paths.get(rootPath+"//"+foto.getOriginalFilename());
