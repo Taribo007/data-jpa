@@ -1,5 +1,6 @@
 package com.bolsadeideas.springboot.app.controllers;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.nio.file.Files;
@@ -51,9 +52,11 @@ public class ClienteController {
 	
 	private final Logger log=LoggerFactory.getLogger(getClass());
 	
+	private final static String UPLOADS_FOLDER="uploads";
+	
 	@GetMapping(value="/uploads/{filename:.+}")
 	public ResponseEntity <Resource> verFoto(@PathVariable String filename){
-		Path pathFoto=Paths.get("uploads").resolve(filename).toAbsolutePath();
+		Path pathFoto=Paths.get(UPLOADS_FOLDER).resolve(filename).toAbsolutePath();
 		log.info("pathFoto: " + pathFoto);
 		
 		Resource recurso=null;
@@ -167,10 +170,21 @@ public class ClienteController {
 			//Vamos a establecer el nombre del archivo de forma aleatoria cada vez que se seleccione suna imagen, le añadimos al nombre un valor aleatorio
 			//paraq ue nunca se suban imagenes con igual nombre
 			
+			//Aqui vamos a ñadir la opcion de que se pueda sustituir una imagen por otra
+			
+			if (cliente.getId() !=null && cliente.getId() > 0 && cliente.getFoto()!=null && cliente.getFoto().length()>0) {
+				Path rootPath= Paths.get(UPLOADS_FOLDER).resolve(cliente.getFoto()).toAbsolutePath();
+				File archivo=rootPath.toFile();
+				
+				if(archivo.exists() && archivo.canRead()) {
+					archivo.delete();
+				}
+			}
+			
 			String uniqueFilename=UUID.randomUUID().toString() + "_" +foto.getOriginalFilename();
 			
 			
-			Path rootPath=Paths.get("uploads").resolve(uniqueFilename);
+			Path rootPath=Paths.get(UPLOADS_FOLDER).resolve(uniqueFilename);
 			
 			Path rootAbsolutPath=rootPath.toAbsolutePath();
 			
@@ -212,8 +226,21 @@ public class ClienteController {
 		
 		
 		if(id>0) {
+			Cliente cliente=clienteService.findOne(id);
+			
 			clienteService.deleteOne(id);
 			flash.addFlashAttribute("success", "Cliente eliminado con exito");
+			
+			Path rootPath= Paths.get(UPLOADS_FOLDER).resolve(cliente.getFoto()).toAbsolutePath();
+			File archivo=rootPath.toFile();
+			
+			if(archivo.exists() && archivo.canRead()) {
+				if (archivo.delete()) {
+					flash.addFlashAttribute("info", "Imagen eliminada con exito: " + cliente.getFoto());
+				}
+			}
+			
+			
 		}
 		
 		return "redirect:/listar";
